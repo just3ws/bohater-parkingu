@@ -1,4 +1,4 @@
-FROM golang
+FROM golang:alpine
 
 RUN go get github.com/tools/godep
 
