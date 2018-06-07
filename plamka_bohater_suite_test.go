@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestPunktBohater(t *testing.T) {
+func TestPlamkaBohater(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "PunktBohater Suite")
+	RunSpecs(t, "PlamkaBohater Suite")
 }

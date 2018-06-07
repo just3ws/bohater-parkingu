@@ -5,7 +5,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("PunktBohater", func() {
+var _ = Describe("PlamkaBohater", func() {
 	It("should greet the world", func() {
 		message := "Hello, World!"
 		Expect(Say()).To(Equal(message))

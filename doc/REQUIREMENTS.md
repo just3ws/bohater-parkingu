@@ -1,4 +1,4 @@
-# Punkt Bohater
+# Plamka Bohater
 
 Build a web application that allows a user to enter a date time range and get
 back the rate at which they would be charged to park for that time span.
