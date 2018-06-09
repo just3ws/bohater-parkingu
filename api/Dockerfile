@@ -1,14 +1,12 @@
 FROM golang:1.10
 
-# COPY . /go/src/github.com/just3ws/bohater-parkingu/api
-WORKDIR /go/src/github.com/just3ws/bohater-parkingu/api
+LABEL Description="Image of our Hero of Parking Spaces API" Vendor="Mike Hall" Version="1.0"
 
-RUN go get github.com/golang/dep
-RUN go get github.com/pilu/fresh
+WORKDIR /go/src
 
-# RUN go get ./
-# RUN go build
+RUN go get github.com/golang/dep/cmd/dep
+RUN go get github.com/codegangsta/gin
 
-# CMD fresh
+CMD pwd ; ls -al ; gin --port 8888 run api.go
 
-EXPOSE 8088
+EXPOSE 8888

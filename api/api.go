@@ -94,7 +94,7 @@ import (
 
 func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	setCors(w)
-	fmt.Fprintf(w, "THIS IS THE RESTFUL API")
+	fmt.Fprintf(w, "MAYBE THIS IS THE RESTFUL API")
 }
 
 // used for COR preflight checks
@@ -103,17 +103,17 @@ func corsHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 }
 
 // util
-func getFrontendUrl() string {
+func getFrontendURL() string {
 	if os.Getenv("APP_ENV") == "production" {
-		return "http://localhost:3000" // change this to production domain
+		return "http://localhost:8888" // change this to production domain
 	} else {
-		return "http://localhost:3000"
+		return "http://localhost:8888"
 	}
 }
 
 func setCors(w http.ResponseWriter) {
-	frontendUrl := getFrontendUrl()
-	w.Header().Set("Access-Control-Allow-Origin", frontendUrl)
+	frontendURL := getFrontendURL()
+	w.Header().Set("Access-Control-Allow-Origin", frontendURL)
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 }
@@ -147,14 +147,10 @@ func main() {
 	// log.Println("connected to DB")
 
 	// print env
-	env := os.Getenv("APP_ENV")
-	if env == "production" {
-		log.Println("Running api server in production mode")
-	} else {
-		log.Println("Running api server in dev mode")
-	}
+	log.Println("Running api server in dev mode")
 
-	http.ListenAndServe(":8088", router)
+	port := os.Getenv("PORT")
+	http.ListenAndServe(":"+port, nil)
 }
 
-// test!
+// nooo.

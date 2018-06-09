@@ -10,8 +10,11 @@ clean:
 	$(CLEAN)
 	rm -f $(BINARY_NAME)
 
-run:
+daemon:
 	docker-compose up --remove-orphans --force-recreate --build --detach
+
+start:
+	docker-compose up --remove-orphans --force-recreate --build
 
 stop:
 	docker-compose down --remove-orphans --rmi all
