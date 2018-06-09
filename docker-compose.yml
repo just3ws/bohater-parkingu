@@ -2,10 +2,10 @@
 version: '3.3'
 services:
   api:
-    container_name: api
+    container_name: bohater-parkingu-api
     image: bohater-parkingu-api
     build: ./api
-    working_dir: /go/src/github.com/just3ws/bohater-parkingu/api
+    tty: true
     volumes:
       - type: bind
         source: ./api
