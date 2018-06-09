@@ -2,18 +2,19 @@
 version: '3.3'
 services:
   bohater-parkingu-api:
-    working_dir: /go/src
+    working_dir: /go/src/api
     # tty: true
     environment:
       - GOBIN=/go/bin
-      - PORT=8888
     container_name: bohater-parkingu-api
-    image: bohater-parkingu-api
-    build: ./api
+    image: golang:stretch
+    build: ./
     volumes:
       - type: bind
         source: ./api
-        target: /go/src
+        target: /go/src/api
         read_only: false
     ports:
       - "8888:8888"
+      - "8080:8080"
+      - "3000:3000"
