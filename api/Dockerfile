@@ -6,9 +6,9 @@ WORKDIR /go/src/github.com/just3ws/bohater-parkingu/api
 RUN go get github.com/golang/dep
 RUN go get github.com/pilu/fresh
 
-RUN go get ./
-RUN go build
+# RUN go get ./
+# RUN go build
 
-CMD fresh
+# CMD fresh
 
 EXPOSE 8088

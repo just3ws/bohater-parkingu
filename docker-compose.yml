@@ -1,10 +1,9 @@
 ---
 version: '3.3'
 services:
-  bohater-parkingu_api:
-    env_file: .env
-    container_name: bohater-parkingu_api
-    image: bohater-parkingu_api
+  api:
+    container_name: api
+    image: bohater-parkingu-api
     build: ./api
     working_dir: /go/src/github.com/just3ws/bohater-parkingu/api
     volumes:
