@@ -1,4 +1,4 @@
-# Plamka Bohater
+# Bohater Parkingu
 
 Build a web application that allows a user to enter a date time range and get
 back the rate at which they would be charged to park for that time span.
@@ -68,5 +68,17 @@ back the rate at which they would be charged to park for that time span.
       "price": 925
     }
   ]
+}
+```
+
+```
+/rate
+{
+  "starts": "2015-07-01T07:00:00Z",
+  "ends": "2015-07-01T12:00:00Z"
+}
+
+{
+  "price": "1500"
 }
 ```
