@@ -1,12 +1,15 @@
 ---
-version: '3'
+version: '3.3'
 services:
   bohater-parkingu_api:
     env_file: .env
     container_name: bohater-parkingu_api
     image: bohater-parkingu_api
     build: ./api
+    working_dir: /go/src/github.com/just3ws/bohater-parkingu/api
     volumes:
-      - ./api:${GOPATH}/src/github.com/just3ws/bohater-parkingu/api
+      - type: bind
+        source: ./api
+        target: /go/src/github.com/just3ws/bohater-parkingu/api
     ports:
-      - "8888:8888"
+      - "3000:8088"
