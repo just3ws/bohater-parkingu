@@ -1,4 +1,4 @@
-package bohaterparkingu
+package main
 
 import (
 	"testing"
