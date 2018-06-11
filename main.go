@@ -19,9 +19,8 @@ func LookupRate(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func main() {
-	router := httprouter.New()
-	router.GET("/", Index)
-	router.GET("/rate", LookupRate)
+	http.HandleFunc("/v1/rate", func(w http.ResponseWriter, r *http.Request) {
+	})
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

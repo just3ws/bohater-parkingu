@@ -1,94 +1,82 @@
 ---
 openapi: 3.0.0
-info:
-  contact:
-    email: mike@just3ws.com
-  description: Parking rate for a given date and time range.
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Bohater Parkingu API
-  version: 1.0.1
 servers:
   - description: Bohater Parkingu Rates API
-    url: https://virtserver.swaggerhub.com/just3ws/bohater-parkingu/1.0.1
-tags:
-  - description: Operations available to regular developers
-    name: developers
+    url: https://virtserver.swaggerhub.com/just3ws/bohater-parkingu
+info:
+  description: Parking rate for a given date and time range.
+  version: "1.1.0"
+  title: Bohater Parkingu API
+  contact:
+    email: mike@just3ws.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
   /rate:
     get:
+      summary: Lookup rate info for date and time range.
+      operationId: lookupRate
       description: >
         By passing in the start and end of your time range you can get the rate
         for the spot.
-      operationId: lookupRate
       parameters:
-        - description: Start of the desired rate period
-          explode: true
-          in: query
+        - in: query
           name: starts
+          description: Start of the desired rate period
           required: true
           schema:
-            format: date-time
             type: string
-          style: form
-        - description: End of the desired rate period.
-          explode: true
-          in: query
+            format: date-time
+        - in: query
           name: ends
+          description: End of the desired rate period.
           required: true
           schema:
-            format: date-time
             type: string
-          style: form
+            format: date-time
       responses:
         200:
+          description: Rate for the effective time range.
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Rate'
-                type: array
-          description: Rate for the effective time range.
+                type: object
+                $ref: '#/components/schemas/Rate'
         204:
+          description: No available rates for date range
           content:
             text/plain:
               schema:
-                example: unavilable
                 title: unavailable
                 type: string
-          description: No available rates for date range
+                example: unavilable
         404:
+          description: Rate information not found
           content:
             text/plain:
               schema:
-                example: Not found
-                title: Rate information not found
+                title: not found
                 type: string
-          description: Not found response
-      summary: Lookup rate info for date and time range.
-      tags:
-        - developers
+                example: not found
 components:
   schemas:
     Rate:
-      example:
-        price: 1900
-        ends: 2000-01-23T04:56:07.000+00:00
-        starts: 2000-01-23T04:56:07.000+00:00
-      properties:
-        price:
-          example: 1900
-          format: int32
-          type: integer
-        starts:
-          format: date-time
-          type: string
-        ends:
-          format: date-time
-          type: string
+      type: object
       required:
-        - ends
         - price
         - starts
-      type: object
+        - ends
+      properties:
+        price:
+          type: integer
+          format: int32
+          example: 1900
+        starts:
+          type: string
+          format: date-time
+          example: '2016-08-29T08:02:03.001Z'
+        ends:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:04:04.001Z'
