@@ -1,4 +1,4 @@
-package bohaterparkingu
+package models
 
 import (
 	"encoding/json"
@@ -12,7 +12,7 @@ type Rate struct {
 	Ends   time.Time `json:"ends"`
 }
 
-// UnmarshalRate from JSON string
+// UnmarshalRate from JSON
 func UnmarshalRate(str *string) Rate {
 	var rate Rate
 	err := json.Unmarshal([]byte(*str), &rate)
@@ -23,7 +23,7 @@ func UnmarshalRate(str *string) Rate {
 	return rate
 }
 
-// MarshalRate to JSON string
+// MarshalRate to JSON
 func MarshalRate(rate *Rate) string {
 	b, err := json.Marshal(rate)
 	if err != nil {

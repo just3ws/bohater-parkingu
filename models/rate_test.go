@@ -1,4 +1,4 @@
-package bohaterparkingu
+package models
 
 import (
 	"os"
