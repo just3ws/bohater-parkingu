@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/labstack/gommon/log"
+	log "github.com/sirupsen/logrus"
 )
 
 // RateScheduleEntry model
@@ -35,12 +35,6 @@ func RateScheduleLookup(starts time.Time, ends time.Time) (int32, error) {
 
 	log.Debug(starts)
 	log.Debug(ends)
-
-	// if err != nil {
-	// 	log.Error(err)
-	// 	http.Error(w, err.Error(), http.StatusBadRequest)
-	// 	return
-	// }
 
 	return 0, nil
 }

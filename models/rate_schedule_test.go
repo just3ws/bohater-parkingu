@@ -22,7 +22,7 @@ func TestRateSchedule(t *testing.T) {
 	starts, _ = time.Parse(time.RFC3339, "2016-08-29T08:00:00.000Z")
 
 	Convey("UnmarshalRateSchedule", t, func() {
-		log.Debug(starts)
+		log.Debug(starts.Weekday())
 
 		var rateSchedule RateSchedule
 
