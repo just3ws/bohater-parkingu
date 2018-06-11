@@ -2,64 +2,29 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"net/http"
-	"net/url"
 	"os"
-	"time"
 
 	"github.com/just3ws/bohater-parkingu/handlers"
 	"github.com/just3ws/bohater-parkingu/models"
+	"github.com/just3ws/bohater-parkingu/params"
 	log "github.com/sirupsen/logrus"
 )
 
-func EndsParam(url *url.URL) (time.Time, error) {
-	params, ok := url.Query()["ends"]
-
-	if !ok || len(params) < 1 {
-		msg := "ends: param is missing"
-		return time.Time{}, errors.New(msg)
-	}
-
-	ends, err := time.Parse(time.RFC3339, params[0])
-	if err != nil {
-		msg := "ends: param is invalid"
-		return time.Time{}, errors.New(msg)
-	}
-
-	return ends, nil
-}
-
-func StartsParam(url *url.URL) (time.Time, error) {
-	params, ok := url.Query()["starts"]
-
-	if !ok || len(params) < 1 {
-		msg := "starts: param is missing"
-		return time.Time{}, errors.New(msg)
-	}
-
-	starts, err := time.Parse(time.RFC3339, params[0])
-	if err != nil {
-		msg := "starts: param is invalid"
-		return time.Time{}, errors.New(msg)
-	}
-
-	return starts, nil
-}
-
-func RateLookupHandler(w http.ResponseWriter, r *http.Request) {
+// RateHandler for "/rate"
+func RateHandler(w http.ResponseWriter, r *http.Request) {
 	log.Debug("GET /rate")
 
 	w.Header().Set("Content-Type", "application/json")
 
-	starts, err := StartsParam(r.URL)
+	starts, err := params.StartsParam(r.URL)
 	if err != nil {
 		log.Error(err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	ends, err := EndsParam(r.URL)
+	ends, err := params.EndsParam(r.URL)
 	if err != nil {
 		log.Error(err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -93,7 +58,7 @@ func main() {
 	log.Debug("Server starting...")
 
 	http.HandleFunc("/", handlers.IndexHandler)
-	http.HandleFunc("/rate", RateLookupHandler)
+	http.HandleFunc("/rate", RateHandler)
 
 	log.Fatal(http.ListenAndServe(":8888", nil))
 }
