@@ -3,30 +3,15 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
 	"time"
 
+	"github.com/just3ws/bohater-parkingu/handlers"
 	"github.com/just3ws/bohater-parkingu/models"
-	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
-
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	log.Debug("GET /")
-
-	w.Header().Set("Content-Type", "application/json")
-
-	file, err := ioutil.ReadFile("static/spec.json")
-
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Fprintf(w, string(file))
-}
 
 func EndsParam(url *url.URL) (time.Time, error) {
 	params, ok := url.Query()["ends"]
@@ -87,15 +72,27 @@ func RateLookupHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(rate)
 }
 
-var log = logrus.New()
+// var log = logrus.New()
+
+func init() {
+	// Log as JSON instead of the default ASCII formatter.
+	log.SetFormatter(&log.TextFormatter{})
+
+	// Output to stdout instead of the default stderr
+	// Can be any io.Writer, see below for File example
+	log.SetOutput(os.Stdout)
+
+	// Only log the warning severity or above.
+	log.SetLevel(log.DebugLevel)
+}
 
 func main() {
-	// log.SetOutput(os.Stdout)
-	log.Out = os.Stdout
-	log.Level = logrus.DebugLevel
+	// log.Out = os.Stdout
+	// log.Level = logrus.DebugLevel
+
 	log.Debug("Server starting...")
 
-	http.HandleFunc("/", IndexHandler)
+	http.HandleFunc("/", handlers.IndexHandler)
 	http.HandleFunc("/rate", RateLookupHandler)
 
 	log.Fatal(http.ListenAndServe(":8888", nil))
