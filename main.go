@@ -20,5 +20,5 @@ func main() {
 	http.HandleFunc("/", handlers.IndexHandler)
 	http.HandleFunc("/rate", handlers.RateHandler)
 
-	log.Fatal(http.ListenAndServe(":8888", nil))
+	http.ListenAndServe(":8888", nil)
 }

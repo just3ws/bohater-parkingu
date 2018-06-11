@@ -17,7 +17,9 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	file, err := ioutil.ReadFile("static/spec.json")
 
 	if err != nil {
-		panic(err)
+		log.Error(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	fmt.Fprintf(w, string(file))
