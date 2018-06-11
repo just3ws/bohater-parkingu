@@ -1,4 +1,4 @@
-package main
+package bohaterparkingu
 
 import (
 	"fmt"
@@ -13,15 +13,15 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "Welcome!\n")
 }
 
-// Hello endpoint
-func Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+// LookupRate endpoint
+func LookupRate(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("name"))
 }
 
 func main() {
 	router := httprouter.New()
 	router.GET("/", Index)
-	router.GET("/hello/:name", Hello)
+	router.GET("/rate", LookupRate)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
