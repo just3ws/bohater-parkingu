@@ -16,19 +16,28 @@ func TestRate(t *testing.T) {
 	SetDefaultFailureMode(FailureContinues)
 	defer SetDefaultFailureMode(FailureHalts)
 
-	Convey("Rate serialization is case-insensitive", t, func() {
-		var starts time.Time
-		var ends time.Time
+	var starts time.Time
+	var ends time.Time
 
-		starts, _ = time.Parse(time.RFC3339, "2016-08-29T08:00:00.000Z")
-		ends, _ = time.Parse(time.RFC3339, "2016-08-29T09:00:00.000Z")
+	starts, _ = time.Parse(time.RFC3339, "2016-08-29T08:00:00.000Z")
+	ends, _ = time.Parse(time.RFC3339, "2016-08-29T09:00:00.000Z")
 
+	Convey("MarshalRate", t, func() {
+		Convey("When Rate is valid", func() {
+			rate := Rate{Price: 1200, Starts: starts, Ends: ends}
+			str := MarshalRate(&rate)
+
+			So(str, ShouldEqual, `{"price":1200,"starts":"2016-08-29T08:00:00Z","ends":"2016-08-29T09:00:00Z"}`)
+		})
+	})
+
+	Convey("UnmarshalRate", t, func() {
 		var rate Rate
 
 		Convey("When keys are Capitalized", func() {
 			example := `{"Price": 1200, "Starts": "2016-08-29T08:00:00.000Z", "Ends": "2016-08-29T09:00:00.000Z"}`
 
-			rate = UnmarshallRate(&example)
+			rate = UnmarshalRate(&example)
 
 			So(rate.Price, ShouldEqual, 1200)
 			So(rate.Starts, ShouldEqual, starts)
@@ -38,7 +47,7 @@ func TestRate(t *testing.T) {
 		Convey("When keys are lower-cased", func() {
 			example := `{"price": 1200, "starts": "2016-08-29T08:00:00.000Z", "ends": "2016-08-29T09:00:00.000Z"}`
 
-			rate = UnmarshallRate(&example)
+			rate = UnmarshalRate(&example)
 
 			So(rate.Price, ShouldEqual, 1200)
 			So(rate.Starts, ShouldEqual, starts)

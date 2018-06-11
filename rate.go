@@ -12,8 +12,8 @@ type Rate struct {
 	Ends   time.Time `json:"ends"`
 }
 
-// UnmarshallRate from JSON string
-func UnmarshallRate(str *string) Rate {
+// UnmarshalRate from JSON string
+func UnmarshalRate(str *string) Rate {
 	var rate Rate
 	err := json.Unmarshal([]byte(*str), &rate)
 	if err != nil {
@@ -21,4 +21,13 @@ func UnmarshallRate(str *string) Rate {
 	}
 
 	return rate
+}
+
+// MarshalRate to JSON string
+func MarshalRate(rate *Rate) string {
+	b, err := json.Marshal(rate)
+	if err != nil {
+		panic(err)
+	}
+	return string(b)
 }
