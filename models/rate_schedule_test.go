@@ -3,7 +3,10 @@ package models
 import (
 	"io/ioutil"
 	"os"
+	"strconv"
+	"strings"
 	"testing"
+
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -37,7 +40,32 @@ func TestRateSchedule(t *testing.T) {
 			rateSchedule = UnmarshalRateSchedule(&example)
 
 			for i := 0; i < len(rateSchedule.Rates); i++ {
+				log.Debug("{{{")
 				log.Debug(rateSchedule.Rates[i])
+				shortDays := strings.Split(rateSchedule.Rates[i].Days, ",")
+				log.Debug(shortDays)
+
+				days := make([]string, len(shortDays))
+				for i, day := range shortDays {
+					days[i] = strings.ToUpper(day)
+				}
+
+				log.Debug(days)
+
+				times := strings.Split(rateSchedule.Rates[i].Times, "-")
+				log.Debug(times)
+
+				hours := make([]int32, len(times))
+				for i, v := range times {
+					x64, _ := strconv.Atoi(v)
+					hours[i] = int32(x64)
+				}
+
+				log.Debug(hours)
+
+				log.Debug(rateSchedule.Rates[i].Price)
+
+				log.Debug("}}}")
 
 			}
 		})

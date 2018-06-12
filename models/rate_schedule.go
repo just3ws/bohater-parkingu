@@ -7,6 +7,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// RateSchedule model
+type RateSchedule struct {
+	Rates []RateScheduleEntry `json:"rates"`
+}
+
 // RateScheduleEntry model
 type RateScheduleEntry struct {
 	Days  string `json:"days"`
@@ -14,9 +19,14 @@ type RateScheduleEntry struct {
 	Price int32  `json:"price"`
 }
 
-// RateSchedule model
-type RateSchedule struct {
-	Rates []RateScheduleEntry `json:"rates"`
+type RateRange struct {
+	Hours []int32
+	Price int32
+}
+
+func (rr *RateRange) Include(hour int) bool {
+	log.Debug(hour)
+	return false
 }
 
 // UnmarshalRateSchedule from JSON
