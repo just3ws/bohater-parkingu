@@ -4,7 +4,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/just3ws/bohater-parkingu/handlers"
+	"just3ws/bohater-parkingu/handlers"
+
 	log "github.com/sirupsen/logrus"
 )
 

@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/just3ws/bohater-parkingu/models"
-	"github.com/just3ws/bohater-parkingu/params"
+	"just3ws/bohater-parkingu/models"
+	"just3ws/bohater-parkingu/params"
+
 	log "github.com/sirupsen/logrus"
 )
 
@@ -29,7 +30,8 @@ func RateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rate := models.Rate{Price: 1234, Starts: starts, Ends: ends}
+	var price int32 = 8888
+	rate := models.Rate{Price: price, Starts: starts, Ends: ends}
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(rate)
