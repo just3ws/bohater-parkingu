@@ -13,8 +13,9 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20180301161246-7678a5452ebe // indirect
 	github.com/smartystreets/gunit v1.4.3 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
-	golang.org/x/crypto v0.0.0-20180608092829-8ac0e0d97ce4 // indirect
-	golang.org/x/sys v0.0.0-20180611080425-bff228c7b664 // indirect
+	golang.org/x/crypto v0.1.0 // indirect
+	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/term v0.1.0 // indirect
 	gopkg.in/airbrake/gobrake.v2 v2.0.9 // indirect
 	gopkg.in/gemnasium/logrus-airbrake-hook.v2 v2.1.2 // indirect
 )
